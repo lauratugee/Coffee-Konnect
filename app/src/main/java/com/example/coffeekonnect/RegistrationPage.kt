@@ -29,7 +29,9 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun RegistrationPage(){
+fun RegistrationPage(
+    onLoginClick: () ->Unit
+    ){
     var fullName by remember {
         mutableStateOf("")
     }
@@ -199,10 +201,8 @@ fun RegistrationPage(){
             text="Already have an account?"
         )
         TextButton(
-            onClick = {
-                //lOGIN PAGE WILL BE OPENED HERE
-            }
-        ){
+            onClick = onLoginClick
+        ) {
             Text("Login")
 
         }

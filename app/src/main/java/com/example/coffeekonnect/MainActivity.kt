@@ -56,19 +56,30 @@ fun CoffeeKonnectApp() {
                 onLoginClick = {
                     currentScreen = "login"
                 },
-                onRegistrationClick={
-                    currentScreen="register"
+                onRegistrationClick = {
+                    currentScreen = "register"
                 }
             )
         }
 
         "login" -> {
-            LoginPage()
+            LoginPage(
+                onRegistrationClick = {
+                    currentScreen = "register"
+                }
+            )
         }
+
         "register" -> {
-            RegistrationPage()
+            RegistrationPage(
+                onLoginClick = {
+                    currentScreen = "login"
+                }
+            )
         }
     }
+
+
 }
 
 @Composable

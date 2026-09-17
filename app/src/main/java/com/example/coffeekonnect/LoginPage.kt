@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,7 +27,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun LoginPage(){
+fun LoginPage(
+    onRegistrationClick: () -> Unit
+    ){
 
     var email by remember{
         mutableStateOf("")
@@ -43,89 +46,94 @@ fun LoginPage(){
             .padding(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-    ){
+    ) {
         Text(
-            text="COFFEE KONNECT",
-            fontSize=28.sp,
+            text = "COFFEE KONNECT",
+            fontSize = 28.sp,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text="Login to your account",
-            fontSize=18.sp
+            text = "Login to your account",
+            fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(30.dp))
 
         OutlinedTextField(
-            value=email,
+            value = email,
             onValueChange = {
-                email=it
+                email = it
             },
-            label={
+            label = {
                 Text("Email")
             },
             modifier = Modifier.fillMaxWidth()
         )
-            Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedTextField(
-                value=password,
-                onValueChange={
-                    password=it
-                },
-                label={
-                    Text("Password")
-                },
-                visualTransformation= PasswordVisualTransformation(),
-                modifier=Modifier.fillMaxWidth()
+        OutlinedTextField(
+            value = password,
+            onValueChange = {
+                password = it
+            },
+            label = {
+                Text("Password")
+            },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(
+                checked = rememberMe,
+                onCheckedChange = {
+                    rememberMe = it
+                }
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Remember me"
+            )
+            Spacer(modifier = Modifier.weight(1f))
 
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Checkbox(
-                    checked = rememberMe,
-                    onCheckedChange={
-                        rememberMe=it
-                    }
-                )
-                Text(
-                    text="Remember me"
-                )
-                Spacer(modifier=Modifier.weight(1f))
+            Text(
+                text = "Forgot password?"
+            )
+        }
 
-                Text(
-                    text="Forgot password?"
-                )
-            }
+        Button(
+            onClick = {
+                //Login functionality
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Login")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
 
-            Button(
-                onClick={
-                    //Login functionality
-                },
-                modifier = Modifier.fillMaxWidth()
-            ){
-                Text("Login")
-            }
-            Spacer(modifier = Modifier.height(16.dp))
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Don't have an account?"
+            )
+            Spacer(modifier = Modifier.width(5.dp))
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Text(
-                    text="Don't have an account?"
-                )
-                Spacer(modifier = Modifier.width(5.dp))
+            TextButton(
+                onClick = onRegistrationClick
+            ) {
 
                 Text(
-                    text="Sign up"
+                    text = "Sign up"
                 )
             }
 
 
+        }
     }
-}
+    }
