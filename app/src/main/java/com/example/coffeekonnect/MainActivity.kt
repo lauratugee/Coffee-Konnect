@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
 fun CoffeeKonnectApp() {
 
     var currentScreen by remember {
-        mutableStateOf("Welcome")
+        mutableStateOf("welcome")
     }
     when (currentScreen) {
 
