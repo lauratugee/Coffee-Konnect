@@ -55,6 +55,9 @@ fun CoffeeKonnectApp() {
             CoffeeKonnectWelcomePage(
                 onLoginClick = {
                     currentScreen = "login"
+                },
+                onRegistrationClick={
+                    currentScreen="register"
                 }
             )
         }
@@ -62,12 +65,16 @@ fun CoffeeKonnectApp() {
         "login" -> {
             LoginPage()
         }
+        "register" -> {
+            RegistrationPage()
+        }
     }
 }
 
 @Composable
 fun CoffeeKonnectWelcomePage(
-    onLoginClick: () -> Unit
+    onLoginClick: () -> Unit,
+    onRegistrationClick: () -> Unit
 ){
     Scaffold(
         modifier = Modifier.fillMaxSize()
@@ -113,9 +120,7 @@ fun CoffeeKonnectWelcomePage(
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedButton(
-                onClick = {
-                    //Registration screen
-                },
+                onClick = onRegistrationClick,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
