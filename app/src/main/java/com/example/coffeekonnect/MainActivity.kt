@@ -21,7 +21,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -36,7 +35,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CoffeeKonnectTheme {
-                CoffeeKonnectWelcomePage()
+                CoffeeKonnectApp()
 
                 }
             }
@@ -45,7 +44,31 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun CoffeeKonnectWelcomePage(){
+fun CoffeeKonnectApp() {
+
+    var currentScreen by remember {
+        mutableStateOf("Welcome")
+    }
+    when (currentScreen) {
+
+        "welcome" -> {
+            CoffeeKonnectWelcomePage(
+                onLoginClick = {
+                    currentScreen = "login"
+                }
+            )
+        }
+
+        "login" -> {
+            LoginPage()
+        }
+    }
+}
+
+@Composable
+fun CoffeeKonnectWelcomePage(
+    onLoginClick: () -> Unit
+){
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ){ innerPadding ->
@@ -78,10 +101,8 @@ fun CoffeeKonnectWelcomePage(){
             Spacer(modifier=Modifier.height(50.dp))
 
             Button(
-                onClick = {
-                    //Login page
-                },
-                modifier= Modifier.fillMaxWidth()
+                onClick = onLoginClick,
+                modifier = Modifier.fillMaxWidth()
             ){
             Text(
                 text = "Login",
