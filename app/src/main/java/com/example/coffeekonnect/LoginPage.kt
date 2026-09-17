@@ -2,12 +2,15 @@ package com.example.coffeekonnect
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +34,9 @@ fun LoginPage(){
     var password by remember {
         mutableStateOf("")
     }
+    var rememberMe by remember {
+        mutableStateOf(false)
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +55,7 @@ fun LoginPage(){
             text="Login to your account",
             fontSize=18.sp
         )
-        Spacer(modifier = Modifier.height(35.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
         OutlinedTextField(
             value=email,
@@ -74,7 +80,27 @@ fun LoginPage(){
                 visualTransformation= PasswordVisualTransformation(),
                 modifier=Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row (
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Checkbox(
+                    checked = rememberMe,
+                    onCheckedChange={
+                        rememberMe=it
+                    }
+                )
+                Text(
+                    text="Remember me"
+                )
+                Spacer(modifier=Modifier.weight(1f))
+
+                Text(
+                    text="Forgot password?"
+                )
+            }
 
             Button(
                 onClick={
@@ -83,6 +109,21 @@ fun LoginPage(){
                 modifier = Modifier.fillMaxWidth()
             ){
                 Text("Login")
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Text(
+                    text="Don't have an account?"
+                )
+                Spacer(modifier = Modifier.width(5.dp))
+
+                Text(
+                    text="Sign up"
+                )
             }
 
 
